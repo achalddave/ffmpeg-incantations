@@ -6,6 +6,6 @@ for i in *.mp4 ; do
   h=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=s=x:p=0 ${i})
   if [[ $w -gt $max_size ]] && [[ $h -gt $max_size ]] ; then
     # https://stackoverflow.com/a/42024302
-    ffmpeg -i ${i} -vf "scale=$max_size:$max_size:force_original_aspect_ratio=decrease"
+    ffmpeg -i ${i} -vf "scale=$max_size:$max_size:force_original_aspect_ratio=decrease" ${i%.mp4}_reduced.mp4
   fi
 done
